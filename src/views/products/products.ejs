@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+    <%- include ('../partials/head', {title: "Productos"}) %> 
+<body class="body">
+    <%- include('../partials/header')  %> 
+
+    <main class="main main--index">
+        <section class="section-sec">
+            <h3 class="section-sec__titulo">Todos nuestros productos</h3>
+            <aside class="section-sec__filtro">
+                <div class="section-sec__filtro-h4-padre">
+                    <h4 class="section-sec__filtro-h4">Filtrar por...</h4>
+                </div>
+                <div class="section-sec__filtro-padre">
+                    <div class="section-sec__filtro-h5">
+                        <h5>Género:</h5>
+                    </div>
+                    
+                    <div class="section-sec__filtro-div">
+                        <label for="input-radio">Acción <input id="input-radio" name="accion" type="radio" class="section-sec__filtro-input"></label>
+                        <label for="input-radio-2">Aventura <input id="input-radio-2" name="aventura" type="radio" class="section-sec__filtro-input"></label>
+                        <label for="input-radio-3">Estrategia <input id="input-radio-3" name="estrategia" type="radio" class="section-sec__filtro-input"></label>
+                    </div>
+                    
+                    <div class="section-sec__filtro-h5">
+                        <h5>Precio:</h5>
+                    </div>
+    
+                    <div class="section-sec__filtro-div">
+                        <span><label for="input-number" class="section-sec__filtro-label-number">Desde:</label><input type="number" id="input-number" value="9000" min="9000" class="section-sec__filtro-number"></span>
+                        <span><label for="input-number-2"  class="section-sec__filtro-label-number">Hasta:</label><input type="number" id="input-number-2" value="15000" min="10001" max="50001" class="section-sec__filtro-number"></span>
+                    </div>
+    
+                    <div class="section-sec__filtro-h5">
+                        <h5>Edición:</h5>
+                    </div>
+    
+                    <div class="section-sec__filtro-div">
+                        <label for="input-radio-number">Estándar <input id="input-radio-number" name="estandar" type="radio" class="section-sec__filtro-input"></label>
+                        <label for="input-radio-number-2">Deluxe <input id="input-radio-number-2" name="deluxe" type="radio" class="section-sec__filtro-input"></label>
+                        <label for="input-radio-number-3">Gold <input id="input-radio-number-3" name="gold" type="radio" class="section-sec__filtro-input"></label>
+                    </div>
+                </div>
+
+
+                <div class="section-sec__filtro-div-boton">
+                    <button class="section-sec__filtro-boton">Buscar</button>
+                </div>
+            </aside>
+
+            <div class="section-sec__cont-arts">
+
+                <% producto.forEach(element => { %>
+                    <article class="section-sec__arts">
+
+                        <div class="section-sec__cont-picture-star">
+                            <picture class="section-sec__picture">
+                                <img src="../images/juegos/<%= element.img %>" alt="cyberpunk-2077" class="section-sec__imgs">
+                            </picture>
+                            <div class="section-sec__cont-star">
+                                <i class="fas fa-star section-sec__star"></i>
+                            </div>
+                        </div>
+
+                        <div class="section-sec__cont-datos">
+                            <span class="section-sec__spans"><a href="/products/detail/<%= element.id %>" class="section-sec__titulo-enlace"><%= element.nombre %></a></span>
+                            <span class="section-sec__spans">$ <%= element.precio %></span>
+                            <span class="button-carrito">Añadir al carrito</span>
+                        </div>
+
+                        
+                    </article>
+                <% }) %>        
+            </div>
+        </section>
+    </main>
+
+    <%- include ('../partials/footer') %> 
+</body>
+    
+</html>
