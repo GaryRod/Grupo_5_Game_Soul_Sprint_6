@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       type_user: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

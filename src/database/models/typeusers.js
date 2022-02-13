@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   typeUsers.init({
-    type_user: DataTypes.INTEGER
+    type_user: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'typeUsers',

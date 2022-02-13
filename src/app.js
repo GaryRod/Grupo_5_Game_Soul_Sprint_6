@@ -47,7 +47,7 @@ app.use('/products', productsRoutes)
 app.use('/users', userRoutes)
 
 // Error 404
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
     res.status(404).render(path.resolve(__dirname,'views/products/not-found'))
 })
 
