@@ -1,7 +1,10 @@
 const { localsName } = require('ejs');
 const jsonDB = require('../model/jsonDatabase');
 const productModel = jsonDB('products');
-
+const db = require('../database/models');
+const sequelize = db.sequelize;
+const { Op } = require("sequelize");
+const moment = require('moment');
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const productController = {
