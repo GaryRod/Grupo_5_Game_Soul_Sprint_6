@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs')
 const jsonDB = require('../model/jsonDatabase');
 const req = require('express/lib/request');
 const usersModel = jsonDB('users');
+const db = require("../database/models");
 
 const userController ={
     register: (req, res) => {
@@ -39,7 +40,7 @@ const userController ={
             })
         }
 
-        let userToCreate = {
+        /* let userToCreate = {
             ...req.body,
             contraseña: bcryptjs.hashSync(req.body.contraseña, 10),
             isAdmin: String(req.body.email).includes('@gamesoul.com')
@@ -54,6 +55,16 @@ const userController ={
         usersModel.create(userToCreate)
 
         res.redirect('/users/login')
+        */
+
+       db.User.create({
+           first_name: req.body.nombre,
+           email: req.body.email,
+           password: bcryptjs.hashSync(req.body.contraseña, 10),
+           avatar: req.body.avatar
+       })
+
+       res.redirect('/users/login');
     },
     loginProcess: (req,res)=>{
         const errores = validationResult(req);
@@ -64,10 +75,10 @@ const userController ={
             })
         }
 
-        let userToLogin = usersModel.findField ('email', req.body.email)
+        let userToLogin = /* usersModel.findField ('email', req.body.email) */ db.User.findAll({where: {email: req.body.email}});
 
         if(userToLogin){
-            let isOkThePasword = bcryptjs.compareSync(req.body.contraseña, userToLogin.contraseña)
+            let isOkThePasword = /* bcryptjs.compareSync(req.body.contraseña, userToLogin.contraseña) */ db.User.findAll({where: {password: req.body.contraseña}});
             if(isOkThePasword){
                 delete userToLogin.contraseña
                 req.session.userLogged = userToLogin
@@ -101,6 +112,21 @@ const userController ={
         res.clearCookie('userEmail')
         req.session.destroy()
         return res.redirect('/')
+    },
+    editUserProcess: (req, res) => {
+        db.User.update({
+            first_name: req.body.editUser-nombre,
+            email: req.body.editUser-email,
+            password: bcryptjs.hashSync(req.body.editUser-contra, 10),
+            avatar: req.body.editUser-contra
+        }/*,  {
+            where: {
+                id: req.params.id
+            }
+        }*/)
+        .then((user) => {
+            res.render("./users/userProfile", {user});
+        })
     }
 }
 
