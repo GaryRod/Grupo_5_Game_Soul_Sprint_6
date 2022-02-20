@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Game.belongsTo(models.Edition, {
-        as: "game",
+        as: "games",
         foreignKey: "editions_id"
       })
 
       Game.belongsTo(models.Genre, {
       foreignKey: 'genres_id',
-      as: "genre"
+      as: "genres"
       });
 
       Game.belongsTo(models.Console, {
