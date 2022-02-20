@@ -23,6 +23,6 @@ router.delete('/delete/:id', productController.destroy)
 
 router.get('/favoritos',productController.favoritos)
 
-// router.get('/search', productController.search);
+router.get('/search', productController.search);
 
 module.exports = router

@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Game.belongsTo(models.Edition, {
         as: "game",
-        foreignKey: "ediciones_id"
+        foreignKey: "editions_id"
       })
 
       Game.belongsTo(models.Genre, {
@@ -26,12 +26,12 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       Game.hasOne(models.OrderDetail, {
-      foreignKey: 'games_Id',
+      foreignKey: 'games_id',
       as: "orderDetails"
       });
 
       Game.hasMany(models.Image, {
-      foreignKey: 'games_Id',
+      foreignKey: 'games_id',
       as: "images"
       });
     }

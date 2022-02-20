@@ -1,10 +1,7 @@
-const { localsName } = require('ejs');
 const jsonDB = require('../model/jsonDatabase');
 const productModel = jsonDB('products');
-const db = require('../database/models');
-const sequelize = db.sequelize;
-const { Op } = require("sequelize");
-const moment = require('moment');
+const db = require("../database/models");
+const { Op, Association } = require("sequelize");
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const productController = {
@@ -72,7 +69,19 @@ const productController = {
 	favoritos: (req,res)=>{
 		let producto = productModel.all();
 		res.render('./products/favoritos', {favoritos: producto})
-	}
+	},
+	search: async (req, res) => {
+		let search = req.query.search;
+	
+		let productos = await db.Game.findAll({
+			where: {
+				name_game: { [Op.like]: "%" + search + "%" }
+			},
+			include: ["images"]
+		})
+
+		return res.render("products/results", { productos, search });
+	},
 }
 
 module.exports = productController

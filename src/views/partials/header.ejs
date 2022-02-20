@@ -5,7 +5,7 @@
         </div>
 
         <form action='/products/search' method='GET' class="cont-search">
-            <input type="search" placeholder="Dime que juego buscas" class="cont-search__input" id="search">
+            <input type="text" placeholder="Dime que juego buscas" class="cont-search__input" id="search" name="search">
             <label for="search"><img src="/images/iconos/search.svg" class="cont-search__i"></label> 
         </form>
 
@@ -15,11 +15,11 @@
 
                 <% if (locals.isLogged) { %>
                     <ul class="cont-i__lista cont-i__lista--logged">
-                        <span class="cont-i__titulo">Hola <%= locals.userLogged.nombre %>  </span>
+                        <span class="cont-i__titulo">Hola <%= locals.userLogged.first_name %>  </span>
                         <img src="/images/iconosUsuarios/<%= locals.userLogged.avatar %>" alt="" class="cont-i__img">
                         <a href="/users/userProfile" class="cont-i__enlaces">Ir al perfil</a>
 
-                        <% if (locals.userLogged.isAdmin) { %>
+                        <% if (locals.userLogged.type_user) { %>
                             <a href="/products/create" class="cont-i__enlaces">Crear producto</a>
                         <% } %>
 

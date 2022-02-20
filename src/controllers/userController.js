@@ -16,7 +16,6 @@ const userController ={
         res.render('./users/editUser')
     },
     registerProcess: (req, res) => {
-        /* Insertar lógica para el POST acá */
 
         const errores = validationResult(req);
         
@@ -27,29 +26,15 @@ const userController ={
             })
         }
 
-        let userInDB = usersModel.findField('email', req.body.email)
+        // let userInDB = usersModel.findField('email', req.body.email)
 
-        if (userInDB) {
-            return res.render('./users/register',{
-                errors: {
-                    email: {
-                        msg: 'Este email ya está registrado'
-                    }
-                },
-                oldData: req.body
-            })
-        }
+        // let userInDB = db.User.findOne({where: {email: req.body.email}})
 
         /* let userToCreate = {
             ...req.body,
             contraseña: bcryptjs.hashSync(req.body.contraseña, 10),
             isAdmin: String(req.body.email).includes('@gamesoul.com')
-        }
-
-        if (req.file) {
-            userToCreate.avatar = req.file.filename
-        } else {
-            userToCreate.avatar = 'default.png'
+            avatar: req.file ? req.file.filename : 'default.png',
         }
 
         usersModel.create(userToCreate)
@@ -57,14 +42,18 @@ const userController ={
         res.redirect('/users/login')
         */
 
-       db.User.create({
-           first_name: req.body.nombre,
-           email: req.body.email,
-           password: bcryptjs.hashSync(req.body.contraseña, 10),
-           avatar: req.body.avatar
-       })
-
-       res.redirect('/users/login');
+        db.User
+            .create({
+            first_name: req.body.nombre,
+            email: req.body.email,
+            password: bcryptjs.hashSync(req.body.contraseña, 10),
+            avatar: req.file ? req.file.filename : 'default.png',
+            type_user: String(req.body.email).includes('@gamesoul.com')
+            })
+            .then(() => {
+                return res.redirect('/users/login');
+            })
+            .catch(error => console.error(error))
     },
     loginProcess: (req,res)=>{
         const errores = validationResult(req);
@@ -75,33 +64,59 @@ const userController ={
             })
         }
 
-        let userToLogin = /* usersModel.findField ('email', req.body.email) */ db.User.findAll({where: {email: req.body.email}});
+        // let userToLogin = usersModel.findField ('email', req.body.email)
 
-        if(userToLogin){
-            let isOkThePasword = /* bcryptjs.compareSync(req.body.contraseña, userToLogin.contraseña) */ db.User.findAll({where: {password: req.body.contraseña}});
-            if(isOkThePasword){
-                delete userToLogin.contraseña
-                req.session.userLogged = userToLogin
-
-                if(req.body.recuerdame){
-                    res.cookie('userEmail', req.body.email,{maxAge:(1000*60)})
+        db.User.findOne({where: {email: req.body.email}})
+            .then(userToLogin => {
+                if(userToLogin){
+                    let isOkThePasword = bcryptjs.compareSync(req.body.contraseña, userToLogin.password)
+                    if(isOkThePasword){
+                        delete userToLogin.contraseña
+                        req.session.userLogged = userToLogin
+                        if(req.body.recuerdame){
+                            res.cookie('userEmail', userToLogin.email,{maxAge:((1000*60)*60)})
+                        }
+                        return res.redirect('./userProfile')
+                    }
+                    return res.render('./users/login',{
+                        errors: {
+                            contraseña: { msg: 'La contraseña no es válida'},
+                        },
+                        oldData: req.body
+                    })
                 }
-
-                return res.redirect('./userProfile')
-            }
-            return res.render('./users/login',{
-                errors: {
-                    contraseña: { msg: 'La contraseña no es válida'},
-                },
-                oldData: req.body
             })
-        }
+            .catch(error => res.render('./users/login',{
+                errors: {
+                    email: {msg: 'El email no esta en nuestra base de datos'},
+                }}
+            ))
 
-        return res.render('./users/login',{
-            errors: { 
-                email: { msg: 'Por favor, ingresá un email válido' },
-            },
-        })
+        // if(userToLogin){
+        //     let isOkThePasword = /* bcryptjs.compareSync(req.body.contraseña, userToLogin.contraseña) */ db.User.findAll({where: {password: req.body.contraseña}});
+        //     if(isOkThePasword){
+        //         delete userToLogin.contraseña
+        //         req.session.userLogged = userToLogin
+
+        //         if(req.body.recuerdame){
+        //             res.cookie('userEmail', req.body.email,{maxAge:((1000*60)*60)})
+        //         }
+
+        //         return res.redirect('./userProfile')
+        //     }
+        //     return res.render('./users/login',{
+        //         errors: {
+        //             contraseña: { msg: 'La contraseña no es válida'},
+        //         },
+        //         oldData: req.body
+        //     })
+        // }
+
+        // return res.render('./users/login',{
+        //     errors: { 
+        //         email: { msg: 'Por favor, ingresá un email válido' },
+        //     },
+        // })
     },
     profile: (req,res) => {
         res.render('./users/userProfile', {
