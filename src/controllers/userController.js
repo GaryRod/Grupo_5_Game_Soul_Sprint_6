@@ -55,42 +55,43 @@ const userController ={
             })
             .catch(error => console.error(error))
     },
-    loginProcess: (req,res)=>{
-        const errores = validationResult(req);
-        
-        if (errores.errors.length > 0 ) {
-            return res.render('./users/login',{
-                errors: errores.mapped(),
-            })
-        }
+    loginProcess: async (req,res)=>{
+        try {
+            let userToLogin = await db.User.findOne({where: {email: req.body.email}});
 
-        // let userToLogin = usersModel.findField ('email', req.body.email)
+            if (userToLogin) {
+                let isOkThePasword = bcryptjs.compareSync(req.body.contraseña, userToLogin.password);
 
-        db.User.findOne({where: {email: req.body.email}})
-            .then(userToLogin => {
-                if(userToLogin){
-                    let isOkThePasword = bcryptjs.compareSync(req.body.contraseña, userToLogin.password)
-                    if(isOkThePasword){
-                        delete userToLogin.password
-                       req.session.userLogged = userToLogin 
-                        if(req.body.recuerdame){
-                            res.cookie('userEmail', userToLogin.email,{maxAge:((1000*60)*60)})
-                        }
-                        return res.redirect('./userProfile')
+                if (isOkThePasword) {
+                    delete userToLogin.password;
+                    req.session.userLogged = userToLogin;
+
+                    if (req.body.recuerdame) {
+                        res.cookie('userEmail', req.body.email,{maxAge:((1000*60)*60)})
                     }
-                    return res.render('./users/login',{
-                        errors: {
-                            password: { msg: 'La contraseña no es válida'},
-                        },
-                        oldData: req.body
-                    })
+
+                    return res.redirect('./userProfile');
+                }
+
+                return res.render('./users/login', {
+                    errors: {
+                        contraseña: {msg: 'La contraseña no es válida'},
+                    },
+                    oldData: req.body
+                })
+            }
+
+            return res.render('./users/login', {
+                errors: {
+                    email: {
+                        msg: 'No se encuentra este email en nuestra base de datos'
+                    }
                 }
             })
-            .catch(error => res.render('./users/login',{
-                errors: {
-                    email: {msg: 'El email no esta en nuestra base de datos'},
-                }}
-            ))
+        }
+        catch(error) {
+            console.log(error);
+        }
 
         // if(userToLogin){
         //     let isOkThePasword = /* bcryptjs.compareSync(req.body.contraseña, userToLogin.contraseña) */ db.User.findAll({where: {password: req.body.contraseña}});
