@@ -8,7 +8,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 /* Con readDetail - LEE PRODUCTO SEGUN ID */
 router.get('/', productController.products)
 
-router.get('/detail/:id', productController.productDetail);
+router.get('/detail/:id', productController.productDetails);
 
 router.get('/productCart', productController.productCart);
 router.post('/productCart', productController.buyCart);

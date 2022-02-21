@@ -71,8 +71,8 @@ const userController ={
                 if(userToLogin){
                     let isOkThePasword = bcryptjs.compareSync(req.body.contraseña, userToLogin.password)
                     if(isOkThePasword){
-                        delete userToLogin.contraseña
-                        req.session.userLogged = userToLogin
+                        delete userToLogin.password
+                       req.session.userLogged = userToLogin 
                         if(req.body.recuerdame){
                             res.cookie('userEmail', userToLogin.email,{maxAge:((1000*60)*60)})
                         }
@@ -80,7 +80,7 @@ const userController ={
                     }
                     return res.render('./users/login',{
                         errors: {
-                            contraseña: { msg: 'La contraseña no es válida'},
+                            password: { msg: 'La contraseña no es válida'},
                         },
                         oldData: req.body
                     })
