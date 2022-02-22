@@ -1118,6 +1118,10 @@ select {
     border-radius: 25px;
     margin: 0 .5%;
     max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .editUser-principal-div {
@@ -1136,14 +1140,16 @@ select {
 }
 
 .editUser-boton{
-    margin: 3%;
+    margin: auto;
+    display: block;
     padding: 10px;
     width: 50%;
     border-radius: 10px;
     border: solid 1px #000;
     background-color: #eee;
     transition: all .5s;
-    cursor: pointer
+    cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .editUser-boton:hover{

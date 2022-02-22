@@ -3,16 +3,12 @@ const path = require('path')
 const db = require("../database/models");
 
 const validaciones = [
-    body('nombre')
+    body('editUsernombre')
         .notEmpty().withMessage("Debes completar con un nombre"),
-    body('tyc')
-        .notEmpty().withMessage("Debes aceptar los términos y condiciones"),
-    body('fechaNacimiento')
-        .notEmpty().withMessage("Debes elegir tu fecha de nacimiento"),
-    body('email')
+    body('editUseremail')
         .notEmpty().withMessage("Debes completar con un email")
         .isEmail().withMessage("Debes ingresar un email válido"),
-    body("email", "Email en uso, favor introduzca otra dirección de correo").custom((value) => {
+    body("editUseremail", "Email en uso, favor introduzca otra dirección de correo").custom((value) => {
         return db.User
             .findOne({ where: { email: value } })
             .then((usuario) => {
@@ -21,10 +17,10 @@ const validaciones = [
             }
             })
     }),
-    body('contraseña')
+    body('editUsercontra')
         .notEmpty().withMessage("Debes escribir una contraseña")
         .isLength({min: 8}).withMessage("Debes escribir una contraseña de 8 o más caracteres"),
-    body('avatar').custom((value, {req})=>{
+    body('editUserfoto').custom((value, {req})=>{
         let file = req.file
         let acceptedExtensions = ['.jpg', '.png']
         

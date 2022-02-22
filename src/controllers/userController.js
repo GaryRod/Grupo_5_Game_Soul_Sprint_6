@@ -26,7 +26,6 @@ const userController ={
                 oldData: req.body
             })
         }
-
         db.User.create({
             first_name: req.body.nombre,
             email: req.body.email,

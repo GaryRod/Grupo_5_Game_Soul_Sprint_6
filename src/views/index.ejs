@@ -56,15 +56,15 @@
         </section>
 
         <section class="section-sec">
-            <h3 class="section-sec__titulo">Más visitados por la comunidad</h3>
+            <h3 class="section-sec__titulo">Juegos de Acción</h3>
             <div class="section-sec__cont-arts">
 
-                <% masVistos.forEach(element => { %>
+                <% game.forEach(element => { %>
                     <a href="products/detail/<%= element.id %>" class="section-sec__titulo-enlace">
                         <article class="section-sec__arts">
                             <div class="section-sec__cont-picture-star">
                                 <picture class="section-sec__picture">
-                                    <img src="/images/juegos/<%= element.img %>" alt="<% element.nombre %>" class="section-sec__imgs">
+                                    <img src="/images/juegos/<%= element.images[0].img_url %>" alt="<% element.name_game %>" class="section-sec__imgs">
                                 </picture>
                                 <div class="section-sec__cont-star">
                                     <i class="fas fa-star section-sec__star"></i>
@@ -72,8 +72,8 @@
                             </div>
 
                             <div class="section-sec__cont-datos">
-                                <span class="section-sec__spans"><%= element.nombre %></span>
-                                <span class="section-sec__spans">$ <%= element.precio %></span>
+                                <span class="section-sec__spans"><%= element.name_game %></span>
+                                <span class="section-sec__spans">$ <%= element.price %></span>
                                 <span class="button-carrito">Añadir al carrito</span>
                             </div>
                         </article>
@@ -83,16 +83,16 @@
         </section>
 
         <section class="section-sec">
-            <h3 class="section-sec__titulo">Basado en tu última visita</h3>
+            <h3 class="section-sec__titulo">Juegos de Deportes</h3>
             <div class="section-sec__cont-arts">
 
-                <% visitados.forEach(element => { %>
+                <% game2.forEach(element => { %>
                     <a href="products/detail/<%= element.id %>" class="section-sec__titulo-enlace">
                         <article class="section-sec__arts">
 
                             <div class="section-sec__cont-picture-star">
                                 <picture class="section-sec__picture">
-                                    <img src="/images/juegos/<%= element.img %>" alt="<% element.alt %>" class="section-sec__imgs">
+                                    <img src="/images/juegos/<%= element.images[0].img_url %>" alt="<% element.name_game %>" class="section-sec__imgs">
                                 </picture>
                                 <div class="section-sec__cont-star">
                                     <i class="fas fa-star section-sec__star"></i>
@@ -100,8 +100,8 @@
                             </div>
 
                             <div class="section-sec__cont-datos">
-                                <span class="section-sec__spans"><%= element.nombre %></span>
-                                <span class="section-sec__spans">$ <%= element.precio %></span>
+                                <span class="section-sec__spans"><%= element.name_game %></span>
+                                <span class="section-sec__spans">$ <%= element.price %></span>
                                 <span class="button-carrito">Añadir al carrito</span>
                             </div>
                         </article>
