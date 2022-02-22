@@ -50,12 +50,12 @@
 
             <div class="section-sec__cont-arts">
 
-                <% producto.forEach(element => { %>
+                <% productos.forEach(element => { %>
                     <article class="section-sec__arts">
 
                         <div class="section-sec__cont-picture-star">
                             <picture class="section-sec__picture">
-                                <img src="../images/juegos/<%= element.images[0].img_url%>" alt="cyberpunk-2077" class="section-sec__imgs">
+                                <img src="../images/juegos/" alt="El juego es <%= element.name_game %>" class="section-sec__imgs">
                             </picture>
                             <div class="section-sec__cont-star">
                                 <i class="fas fa-star section-sec__star"></i>

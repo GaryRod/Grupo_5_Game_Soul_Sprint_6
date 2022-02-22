@@ -53,7 +53,7 @@ const userController ={
             .then(() => {
                 return res.redirect('/users/login');
             })
-            .catch(error => console.error(error))
+            .catch(error => res.send(error))
     },
     loginProcess: (req,res)=>{
         const errores = validationResult(req);
@@ -72,7 +72,7 @@ const userController ={
                     let isOkThePasword = bcryptjs.compareSync(req.body.contraseña, userToLogin.password)
                     if(isOkThePasword){
                         delete userToLogin.password
-                       req.session.userLogged = userToLogin 
+                        req.session.userLogged = userToLogin 
                         if(req.body.recuerdame){
                             res.cookie('userEmail', userToLogin.email,{maxAge:((1000*60)*60)})
                         }
@@ -86,11 +86,7 @@ const userController ={
                     })
                 }
             })
-            .catch(error => res.render('./users/login',{
-                errors: {
-                    email: {msg: 'El email no esta en nuestra base de datos'},
-                }}
-            ))
+            .catch(error => res.send(error))
 
         // if(userToLogin){
         //     let isOkThePasword = /* bcryptjs.compareSync(req.body.contraseña, userToLogin.contraseña) */ db.User.findAll({where: {password: req.body.contraseña}});

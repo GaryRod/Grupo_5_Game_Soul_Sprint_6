@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Game.belongsTo(models.Edition, {
-        as: "games",
-        foreignKey: "editions_id"
+        foreignKey: "editions_id",
+        as: "editions"
       })
 
       Game.belongsTo(models.Genre, {

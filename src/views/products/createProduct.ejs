@@ -6,7 +6,7 @@
 <body class="body body--createProduct body--registro-login">
 
     <%- include ('../partials/header') %>
-    
+
     <main class="main main--createProduct">
         <form action="" method="post" class="formCreateProduct animate__animated animate__fadeInDown" enctype="multipart/form-data">
             
@@ -28,20 +28,18 @@
             <div class="form__seccion-categoria">
                 <h5 class="form__seccion-h5">Selecciona un género:</h5>
                 <select class="input__create-product" name="genero" required>
-                    <% for( let i = 0; i < producto.genres.length; i++ ) { %>
-                        <option value="<%=producto.genres[i].id%> "> 
-                            <%= producto.genres[i].name_genre %> 
-                        </option>
-                       <% } %>
+                    <% promGenres.forEach(genero => { %>
+                        <option value="<%= genero.id %>"> <%= genero.name_genre %> </option>
+                    <% }) %>
                 </select>
             </div>
             
             <div class="form__seccion-edicion">
                 <h5 class="form__seccion-h5">Selecciona una edición:</h5>
                 <select class="input__create-product" name="edicion" required>
-                    <option value="estandar">Estándar</option>
-                    <option value="deluxe">Deluxe</option>
-                    <option value="gold">Gold</option>
+                    <% promEditions.forEach(edicion => { %>
+                        <option value="<%= edicion.id %>"> <%= edicion.name_editions %> </option>
+                    <% }) %>
                 </select>
             </div>
             
