@@ -27,8 +27,7 @@ const userController ={
             })
         }
 
-        db.User
-            .create({
+        db.User.create({
             first_name: req.body.nombre,
             email: req.body.email,
             password: bcryptjs.hashSync(req.body.contraseña, 10),
