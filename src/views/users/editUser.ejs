@@ -7,38 +7,49 @@
 
     <%- include('../partials/header', { title: "Editar Usuario" })  %>
 
-    <main class="main--editUser animate__animated animate__fadeInDown">
-        <div class="main--editUser-h1">
-            <h3>¿Qué deseas editar de tu Usuario?</h3>
-        </div>
+    <main class="main main--registro-login animate__animated animate__fadeInDown">
+        <section class="form">
 
-        <div class="main--editUser-principal">
-            <form action="/users/editUser/<%= datosDeUsuario.id %>?_method=PUT" method="post" class="main--editUser-form" enctype="multipart/form-data">
+            <h3>¿Qué deseas editar de tu perfil?</h3>
 
-                <div class="editUser-principal-div">
-                    <label for="editUser-nombre">Nombre de usuario:</label><input class="editUser-principal-input" value="<%= datosDeUsuario.first_name %>" id="editUser-nombre" name="editUsernombre" type="text" placeholder="Tu nombre de usuario...">
+            <form action="/users/editUser/<%= datosDeUsuario.id %>?_method=PUT" method="post" class="form__contenedor-inputs" enctype="multipart/form-data">
+                <div class="form__cont">
+                    <label for="editUser-nombre">Nombre:</label>
+                    <input class="form__inputs" value="<%= locals.oldData ? oldData.editUsernombre : datosDeUsuario.first_name %>" id="editUser-nombre" name="editUsernombre" type="text" placeholder="Tu nombre de usuario...">
+                    <% if (locals.errors && errors.editUsernombre) { %>
+                        <p class="text-danger"><%= errors.editUsernombre.msg %></p>
+                    <% } %>
                 </div>
                 
-                <div class="editUser-principal-div">
-                    <label for="editUser-email">Email:</label><input class="editUser-principal-input" value="<%= datosDeUsuario.email %>" id="editUser-email" name="editUseremail" type="email" placeholder="Tu email...">
+                <div class="form__cont">
+                    <label for="editUser-email">Email:</label>
+                    <input class="form__inputs" value="<%= locals.oldData ? oldData.editUseremail : datosDeUsuario.email %>" id="editUser-email" name="editUseremail" type="email" placeholder="Tu email...">
+                    <% if (locals.errors && errors.editUseremail) { %>
+                        <p class="text-danger"><%= errors.editUseremail.msg %></p>
+                    <% } %> 
                 </div>
                 
-                <div class="editUser-principal-div">
-                    <label for="editUser-contra">Contraseña:</label><input class="editUser-principal-input" value="<%= datosDeUsuario.password %>" id="editUser-contra" name="editUsercontra" type="password" placeholder="Tu contraseña...">
+                <div class="form__cont">
+                    <label for="editUser-contra">Contraseña:</label>
+                    <input class="form__inputs" id="editUser-contra" name="editUsercontra" type="password" placeholder="Escribe tu nueva contraseña">
+                    <% if (locals.errors && errors.editUsercontra) { %>
+                        <p class="text-danger"><%= errors.editUsercontra.msg %></p>
+                    <% } %>
                 </div>
 
-                <div class="editUser-principal-div">
-                    <label for="editUser-foto" class=>Tu Foto de Perfil:</label><input class="editUser-principal-input" value="<%= datosDeUsuario.avatar %>" id="editUser-foto" name="editUserfoto" type="file" accept=".png, .jpg">
+                <div>
+                    <label for="editUser-foto" class=>Imagen de Perfil:</label>
+                    <input id="editUser-foto" name="editUserfoto" type="file" accept=".png, .jpg">
                 </div>
 
-                <div class="editUser-principal-div">
+                <div>
                     <input type="hidden" value="<%= datosDeUsuario.avatar %>" name="oldAvatar">
                 </div>
                 
-                <button class="editUser-boton" type="submit">Editar</button>
+                <button class="button-crearCuenta-iniciarSesion" type="submit">Editar</button>
             </form>
 
-        </div>
+        </section>
     </main>
 
     <%- include ('../partials/footer') %>

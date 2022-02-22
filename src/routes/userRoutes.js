@@ -19,7 +19,7 @@ router.post('/register', userIconsUpload.single('avatar'), validacionesRegister,
 router.get('/userProfile', authMiddleware, userController.profile);
 
 router.get('/editUser/:id', userController.editUser);
-router.put('/editUser/:id', userIconsUpload.single('editUserfoto') , userController.editUserProcess);
+router.put('/editUser/:id', userIconsUpload.single('editUserfoto'),validacionesEditUser , userController.editUserProcess);
 
 router.get('/logout', userController.logout);
 

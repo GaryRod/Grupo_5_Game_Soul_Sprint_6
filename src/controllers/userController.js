@@ -1,7 +1,5 @@
 const {validationResult} = require('express-validator');
 const bcryptjs = require('bcryptjs')
-const jsonDB = require('../model/jsonDatabase');
-const usersModel = jsonDB('users');
 const db = require("../database/models");
 
 const userController ={
@@ -10,12 +8,6 @@ const userController ={
     },
     login: (req, res) => {
         res.render('./users/login')
-    },
-    editUser: (req, res) => {
-        db.User.findByPk(req.params.id)
-        .then((datosDeUsuario) => {
-            res.render('./users/editUser', {datosDeUsuario})
-        })
     },
     registerProcess: (req, res) => {
         const errores = validationResult(req);
@@ -40,6 +32,15 @@ const userController ={
     },
     loginProcess: async (req, res) => {
         try {
+            const errores = validationResult(req);
+            
+            if (errores.errors.length > 0 ) {
+                return res.render('./users/login',{
+                    errors: errores.mapped(),
+                    oldData: req.body
+                })
+            }
+
             let userToLogin = await db.User.findOne({where: {email: req.body.email}});
             
             if (userToLogin) {
@@ -84,21 +85,31 @@ const userController ={
         req.session.destroy()
         return res.redirect('/')
     },
+    editUser: (req, res) => {
+        db.User.findByPk(req.params.id)
+        .then((datosDeUsuario) => {
+            res.render('./users/editUser', {datosDeUsuario})
+        })
+    },
     editUserProcess: async (req, res) => {
         try {
-            let avatar;
+            let datosDeUsuario = await db.User.findByPk(req.params.id)
 
-            if (req.file == undefined || null) {
-                avatar = req.body.oldAvatar
-            } else {
-                avatar = req.file.filename
+            const errores = validationResult(req);
+            
+            if (errores.errors.length > 0 ) {
+                return res.render('./users/editUser',{
+                    errors: errores.mapped(),
+                    oldData: req.body,
+                    datosDeUsuario
+                })
             }
 
             let usuarioCreado = await db.User.update({
                 first_name: req.body.editUsernombre,
                 email: req.body.editUseremail,
                 password: bcryptjs.hashSync(req.body.editUsercontra, 10),
-                avatar: avatar
+                avatar: req.file ? req.file.filename : req.body.oldAvatar,
             }, {
                 where: {
                     id: req.params.id
@@ -106,7 +117,8 @@ const userController ={
             })
 
             res.redirect('/users/userProfile')
-        } catch (error) {
+        } 
+        catch (error) {
             console.log(error);
         }
     }

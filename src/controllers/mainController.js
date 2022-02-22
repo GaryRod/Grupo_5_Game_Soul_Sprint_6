@@ -8,9 +8,6 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const mainController = {
     index: async (req, res) => {
         let recomendados = productModel.buscado('recomendados');
-        // let masVistos = productModel.buscado('mas-vistos');
-        // let visitados = productModel.buscado('visited');
-        // res.render('./index', {masVistos, visitados, recomendados})
         let game = await db.Game.findAll({
             where: {
                 genres_id: 1

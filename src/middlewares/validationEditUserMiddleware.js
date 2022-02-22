@@ -8,15 +8,6 @@ const validaciones = [
     body('editUseremail')
         .notEmpty().withMessage("Debes completar con un email")
         .isEmail().withMessage("Debes ingresar un email válido"),
-    body("editUseremail", "Email en uso, favor introduzca otra dirección de correo").custom((value) => {
-        return db.User
-            .findOne({ where: { email: value } })
-            .then((usuario) => {
-            if (usuario) {
-                return Promise.reject();
-            }
-            })
-    }),
     body('editUsercontra')
         .notEmpty().withMessage("Debes escribir una contraseña")
         .isLength({min: 8}).withMessage("Debes escribir una contraseña de 8 o más caracteres"),

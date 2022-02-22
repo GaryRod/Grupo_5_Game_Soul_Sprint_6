@@ -12,14 +12,14 @@
 
             <section class="form__primera-seccion">
                 <span class="form__subtitulo-span">REGISTRATE O INICIA SESIÓN CON TUS REDES SOCIALES</span>
-                <ul class="lista-iconos-registro">
+                <ul class="lista-iconos-redes">
                     <li class="iconos-redes"><a href="#"><i class="fab fa-facebook"></i></a></li>
                     <li class="iconos-redes"><a href="#"><i class="fab fa-twitter-square"></i></a></li>
                     <li class="iconos-redes"><a href="#"><i class="fab fa-instagram"></i></a></li>
                 </ul>
             </section>
 
-            <section class="form-registro">
+            <section class="form">
                     <div class="form__contenedor-subtitulos">         
                         <label class="tenesCuenta-registro">¿Tenés una cuenta?</label>
                         <div><a href="/users/login" class="button-iniciarSesion">Iniciar Sesión</a></div>
@@ -28,7 +28,7 @@
                     <div class="form__contenedor-inputs">
                         <div class="form__cont">
                             <label>Nombre:</label>
-                            <input type="text" name="nombre" class="form__input-login" value="<%= locals.oldData ? oldData.nombre : null %>">
+                            <input type="text" name="nombre" class="form__inputs" value="<%= locals.oldData ? oldData.nombre : null %>">
                             <% if (locals.errors && errors.nombre) { %>
                                 <p class="text-danger"><%= errors.nombre.msg %></p>
                             <% } %>
@@ -36,7 +36,7 @@
 
                         <div class="form__cont">
                             <label>E-mail:</label>
-                            <input type="email" name="email" class="form__input-login" value="<%= locals.oldData ? oldData.email : null %>">
+                            <input type="email" name="email" class="form__inputs" value="<%= locals.oldData ? oldData.email : null %>">
                             <% if (locals.errors && errors.email) { %>
                                 <p class="text-danger"><%= errors.email.msg %></p>
                             <% } %>
@@ -44,7 +44,7 @@
 
                         <div class="form__cont">
                             <label>Contraseña:</label>
-                            <input type="password" name="contraseña" class="form__input-login" value="<%= locals.oldData ? oldData.contraseña : null %>">
+                            <input type="password" name="contraseña" class="form__inputs" value="<%= locals.oldData ? oldData.contraseña : null %>">
                             <% if (locals.errors && errors.contraseña) { %>
                                 <p class="text-danger"><%= errors.contraseña.msg %></p>
                             <% } %>
@@ -52,7 +52,7 @@
 
                         <div class="form__cont">
                             <label>Fecha de nacimiento:</label>
-                            <input type="date" name="fechaNacimiento" class="form__input-login">
+                            <input type="date" name="fechaNacimiento" class="form__inputs">
                             <% if (locals.errors && errors.fechaNacimiento) { %>
                                 <p class="text-danger"><%= errors.fechaNacimiento.msg %></p>
                             <% } %>
@@ -64,16 +64,16 @@
                         </div>
                     </div>
 
-                    <div class="contenedor-tyc" style="display: flex; flex-direction: column;">
+                    <div class="form__contenedor-recuerdame-tyc" style="display: flex; flex-direction: column;">
                         <label for="tyc">Términos y condiciones
-                            <input type="checkbox" id="tyc" class="input-checkbox" name="tyc">
+                            <input type="checkbox" id="tyc" class="form__recuerdame-tyc" name="tyc">
                         </label>
                         <% if (locals.errors && errors.tyc) { %>
                             <p class="text-danger"><%= errors.tyc.msg %></p>
                         <% } %>
                     </div> 
 
-                    <div class="contenedor-botonCrear">        
+                    <div class="form__cont-login-iniciar-sesion">        
                         <button type="submit"  class="button-crearCuenta-iniciarSesion">Crear Cuenta</button>
                     </div>
             </section> 
