@@ -11,7 +11,7 @@
         <h1 class="main--userProfile-h1">Bienvenido <%= user.first_name %></h1>
 
         <div class="main--userProfile-div">
-            <img src="../images/iconosUsuarios/<%= user.avatar %>" class="fotoPerfil" alt="Foto de Perfil">
+            <img src="/images/iconosUsuarios/<%= user.avatar %>" class="fotoPerfil" alt="Foto de Perfil">
         </div>
 
         <div class="main--userProfile-h2-div">
@@ -19,7 +19,7 @@
         </div>
 
         <div class="main--userProfile-h3-div">
-            <h3 class><a href="./editUser" class="main--userProfile-a">Edita tu perfil</a></h3>
+            <h3 class><a href="editUser/<%= user.id %>" class="main--userProfile-a">Edita tu perfil</a></h3>
         </div>
     </main>
 

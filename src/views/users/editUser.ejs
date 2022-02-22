@@ -13,29 +13,35 @@
         </div>
 
         <div class="main--editUser-principal">
-            <form action="#" method="post" class="main--editUser-form">
+            <form action="/users/editUser/<%= datosDeUsuario.id %>?_method=PUT" method="post" class="main--editUser-form" enctype="multipart/form-data">
 
                 <div class="editUser-principal-div">
-                    <label for="editUser-nombre">Nombre de usuario:</label><input class="editUser-principal-input" id="editUser-nombre" name="editUser-nombre" type="text" placeholder="Tu nombre de usuario...">
+                    <label for="editUser-nombre">Nombre de usuario:</label><input class="editUser-principal-input" value="<%= datosDeUsuario.first_name %>" id="editUser-nombre" name="editUsernombre" type="text" placeholder="Tu nombre de usuario...">
                 </div>
                 
                 <div class="editUser-principal-div">
-                    <label for="editUser-email">Email:</label><input class="editUser-principal-input" id="editUser-email" name="editUser-email" type="email" placeholder="Tu email...">
+                    <label for="editUser-email">Email:</label><input class="editUser-principal-input" value="<%= datosDeUsuario.email %>" id="editUser-email" name="editUseremail" type="email" placeholder="Tu email...">
                 </div>
                 
                 <div class="editUser-principal-div">
-                    <label for="editUser-contra">Contraseña:</label><input class="editUser-principal-input" id="editUser-contra" name="editUser-contra" type="password" placeholder="Tu contraseña...">
+                    <label for="editUser-contra">Contraseña:</label><input class="editUser-principal-input" value="<%= datosDeUsuario.password %>" id="editUser-contra" name="editUsercontra" type="password" placeholder="Tu contraseña...">
                 </div>
 
                 <div class="editUser-principal-div">
-                    <label for="editUser-foto" class=>Tu Foto de Perfil:</label><input class="editUser-principal-input" id="editUser-foto" name="editUser-foto" type="file" accept=".png, .jpg">
+                    <label for="editUser-foto" class=>Tu Foto de Perfil:</label><input class="editUser-principal-input" value="<%= datosDeUsuario.avatar %>" id="editUser-foto" name="editUserfoto" type="file" accept=".png, .jpg">
+                </div>
+
+                <div class="editUser-principal-div">
+                    <input type="hidden" value="<%= datosDeUsuario.avatar %>" name="oldAvatar">
                 </div>
                 
+
+                <button class="editUser-boton" type="submit">Editar</button>
             </form>
 
-            <form action="#" method="post" class="editUser-divboton">
-                <button class="editUser-boton">Editar</button>
-            </form>
+            
+                
+           
         </div>
     </main>
 

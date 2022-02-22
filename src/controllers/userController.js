@@ -13,7 +13,10 @@ const userController ={
         res.render('./users/login')
     },
     editUser: (req, res) => {
-        res.render('./users/editUser')
+        db.User.findByPk(req.params.id)
+        .then((datosDeUsuario) => {
+            res.render('./users/editUser', {datosDeUsuario})
+        })
     },
     registerProcess: (req, res) => {
 
@@ -120,8 +123,9 @@ const userController ={
         // })
     },
     profile: (req,res) => {
-        res.render('./users/userProfile', {
-            user: req.session.userLogged
+        db.User.findByPk(req.session.userLogged.id)
+        .then((user) => {
+            res.render('./users/userProfile', {user})
         })
     },
     logout: (req, res) => {
@@ -129,20 +133,41 @@ const userController ={
         req.session.destroy()
         return res.redirect('/')
     },
-    editUserProcess: (req, res) => {
-        db.User.update({
-            first_name: req.body.editUser-nombre,
-            email: req.body.editUser-email,
-            password: bcryptjs.hashSync(req.body.editUser-contra, 10),
-            avatar: req.body.editUser-contra
-        }/*,  {
-            where: {
-                id: req.params.id
+    editUserProcess: async (req, res) => {
+        /* const erroresEditUser = validationResult(req);
+        
+        if (erroresEditUser.errors.length > 0 ) {
+            return res.render('./users/editUser',{
+                errors: erroresEditUser.mapped(),
+                oldData: req.body
+            })
+        }
+        */
+       
+        try {
+            let avatar;
+
+            if (req.file == undefined || null) {
+                avatar = req.body.oldAvatar
+            } else {
+                avatar = req.file.filename
             }
-        }*/)
-        .then((user) => {
-            res.render("./users/userProfile", {user});
-        })
+
+            let usuarioCreado = await db.User.update({
+                first_name: req.body.editUsernombre,
+                email: req.body.editUseremail,
+                password: bcryptjs.hashSync(req.body.editUsercontra, 10),
+                avatar: avatar
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+
+            res.redirect('/users/userProfile')
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 

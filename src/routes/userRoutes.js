@@ -6,6 +6,7 @@ const validacionesLogin = require('../middlewares/validatorLoginMiddleware');
 const validacionesRegister = require('../middlewares/validatorRegisterMiddleware');
 const guestMiddleware = require('../middlewares/guestMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
+const validacionesEditUser = require('../middlewares/editUserMiddleware');
 
 router.get('/login', guestMiddleware, userController.login)
 
@@ -17,7 +18,8 @@ router.post('/register', userIconsUpload.single('avatar'), validacionesRegister,
 
 router.get('/userProfile', authMiddleware, userController.profile);
 
-router.get('/editUser', authMiddleware, userController.editUser);
+router.get('/editUser/:id', authMiddleware, userController.editUser);
+router.put('/editUser/:id', userIconsUpload.single('editUserfoto'), userController.editUserProcess);
 
 router.get('/logout', userController.logout);
 
