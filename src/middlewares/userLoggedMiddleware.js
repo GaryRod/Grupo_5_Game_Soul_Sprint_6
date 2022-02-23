@@ -1,6 +1,7 @@
 const db = require('../database/models');
+const {Op} = require('sequelize')
 
- async function userLoggedMiddleware(req, res, next) {
+async function userLoggedMiddleware(req, res, next) {
     res.locals.isLogged = false
 
     let emailInCookie = req.cookies.userEmail
