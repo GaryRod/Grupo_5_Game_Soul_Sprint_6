@@ -29,21 +29,21 @@ module.exports = {
       editions_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'editions',
+          model: 'Editions',
           key: 'id'
         }
       },
       genres_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'genres',
+          model: 'Genres',
           key: 'id'
         }
       },
       consoles_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'consoles',
+          model: 'Consoles',
           key: 'id'
         }
       },
