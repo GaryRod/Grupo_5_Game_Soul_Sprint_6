@@ -11,12 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       OrderDetail.belongsTo(models.Game, {
-        foreignKey: 'games_id',
+        foreignKey: 'game_id',
         as: 'games'
-      });
-
+      })
       OrderDetail.belongsTo(models.Order, {
-        foreignKey: 'orders_id',
+        foreignKey: 'order_id',
         as: 'orders'
       });
     }
@@ -24,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
   OrderDetail.init({
     quantity: DataTypes.DECIMAL,
     subtotal: DataTypes.DECIMAL,
-    orders_id: DataTypes.INTEGER,
-    games_id: DataTypes.INTEGER
+    order_id: DataTypes.INTEGER,
+    game_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'OrderDetail',

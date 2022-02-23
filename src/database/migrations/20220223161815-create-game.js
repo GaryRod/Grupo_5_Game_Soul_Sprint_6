@@ -26,21 +26,21 @@ module.exports = {
       stock_max: {
         type: Sequelize.INTEGER
       },
-      editions_id: {
+      edition_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'editions',
           key: 'id'
         }
       },
-      genres_id: {
+      genre_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'genres',
           key: 'id'
         }
       },
-      consoles_id: {
+      console_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'consoles',

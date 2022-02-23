@@ -10,13 +10,13 @@ const mainController = {
         let recomendados = productModel.buscado('recomendados');
         let game = await db.Game.findAll({
             where: {
-                genres_id: 1
+                genre_id: 1
             },
             include: ['images']
         })
         let game2 = await db.Game.findAll({
             where: {
-                genres_id: 5
+                genre_id: 5
             },
             include: ['images']
         })

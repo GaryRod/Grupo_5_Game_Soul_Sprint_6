@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Console.hasMany(models.Game, {
-        foreignKey: 'consoles_id',
+        foreignKey: 'console_id',
         as: "games"
       })
     }

@@ -28,20 +28,20 @@
             <div class="form__seccion-categoria">
                 <h5 class="form__seccion-h5">Selecciona un género:</h5>
                 <select class="input__create-product" name="genero" required>
-                    <option value="1" <% if (productToEdit.genres_id == 1) { %> selected <% } %>>Acción</option>
-                    <option value="2" <% if (productToEdit.genres_id == 2) { %> selected <% } %>>Aventura</option>
-                    <option value="3" <% if (productToEdit.genres_id == 3) { %> selected <% } %>>FPS</option>
-                    <option value="4" <% if (productToEdit.genres_id == 4) { %> selected <% } %>>Estrategia</option>
-                    <option value="5" <% if (productToEdit.genres_id == 5) { %> selected <% } %>>Deportes</option>
+                    <option value="1" <% if (productToEdit.genre_id == 1) { %> selected <% } %>>Acción</option>
+                    <option value="2" <% if (productToEdit.genre_id == 2) { %> selected <% } %>>Aventura</option>
+                    <option value="3" <% if (productToEdit.genre_id == 3) { %> selected <% } %>>FPS</option>
+                    <option value="4" <% if (productToEdit.genre_id == 4) { %> selected <% } %>>Estrategia</option>
+                    <option value="5" <% if (productToEdit.genre_id == 5) { %> selected <% } %>>Deportes</option>
                 </select>
             </div>
 
             <div class="form__seccion-edicion">
                 <h5 class="form__seccion-h5">Selecciona una edición:</h5>
                 <select class="input__create-product" name="edicion" required>
-                    <option value="1" <% if (productToEdit.editions_id == 1) { %> selected <% } %>>Estándar</option>
-                    <option value="2" <% if (productToEdit.editions_id == 2) { %> selected <% } %>>Deluxe</option>
-                    <option value="3" <% if (productToEdit.editions_id == 3) { %> selected <% } %>>Gold</option>
+                    <option value="1" <% if (productToEdit.edition_id == 1) { %> selected <% } %>>Estándar</option>
+                    <option value="2" <% if (productToEdit.edition_id == 2) { %> selected <% } %>>Deluxe</option>
+                    <option value="3" <% if (productToEdit.edition_id == 3) { %> selected <% } %>>Gold</option>
                 </select>
             </div>
 

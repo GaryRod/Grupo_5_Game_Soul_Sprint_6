@@ -32,12 +32,12 @@ const productController = {
             name_game: req.body.nombre,
 			description: req.body.descripcion,
 			price: req.body.precio,
-			editions_id: req.body.edicion,
-			genres_id: req.body.genero
+			edition_id: req.body.edicion,
+			genre_id: req.body.genero
         })
 		await db.Image.create({
 			img_url: req.file.filename,
-			games_id: producto.id
+			game_id: producto.id
 		})
     	res.redirect('/')
     },
@@ -53,18 +53,18 @@ const productController = {
 			name_game: req.body.nombre,
 			description: req.body.descripcion,
 			price: req.body.precio,
-			editions_id: req.body.edicion,
-			genres_id: req.body.genero,
+			edition_id: req.body.edicion,
+			genre_id: req.body.genero,
         },{
             where: {id: req.params.id}
         })
 		await db.Image.destroy({
-            where: {games_id: req.params.id},
+            where: {game_id: req.params.id},
 			force: true
         })
 		await db.Image.create({
 			img_url: req.file.filename,
-			games_id: producto.id
+			game_id: producto.id
 		})
         res.redirect('/')
     },
