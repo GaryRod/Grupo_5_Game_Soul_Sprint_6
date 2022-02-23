@@ -5,7 +5,6 @@ const productController = {
 		let productos = await db.Game.findAll({
 			include: ["images"]
 		})
-		// console.log(productos[0].images);
         res.render('./products/products', {productos})
     },
     productDetails: (req, res) =>{

@@ -105,7 +105,7 @@ const userController ={
                 })
             }
 
-            let usuarioCreado = await db.User.update({
+            await db.User.update({
                 first_name: req.body.editUsernombre,
                 email: req.body.editUseremail,
                 password: bcryptjs.hashSync(req.body.editUsercontra, 10),
