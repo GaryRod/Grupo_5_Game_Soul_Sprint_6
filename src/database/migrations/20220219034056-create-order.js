@@ -1,49 +1,40 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Games', {
+    await queryInterface.createTable('Orders', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name_game: {
-        type: Sequelize.STRING
+      number: {
+        type: Sequelize.INTEGER
       },
-      price: {
+      date: {
+        type: Sequelize.DATE
+      },
+      total: {
         type: Sequelize.DECIMAL
       },
-      description: {
-        type: Sequelize.STRING
-      },
-      stock: {
-        type: Sequelize.INTEGER
-      },
-      stock_min: {
-        type: Sequelize.INTEGER
-      },
-      stock_max: {
-        type: Sequelize.INTEGER
-      },
-      edition_id: {
+      payments_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'editions',
+          model: 'payments',
           key: 'id'
         }
       },
-      genre_id: {
+      statuses_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'genres',
+          model: 'statuses',
           key: 'id'
         }
       },
-      console_id: {
+      users_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'consoles',
+          model: 'users',
           key: 'id'
         }
       },
@@ -58,6 +49,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Games');
+    await queryInterface.dropTable('Orders');
   }
 };

@@ -11,27 +11,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Game.belongsTo(models.Edition, {
-        foreignKey: "edition_id",
+        foreignKey: "editions_id",
         as: "editions"
       })
 
       Game.belongsTo(models.Genre, {
-      foreignKey: 'genre_id',
+      foreignKey: 'genres_id',
       as: "genres"
       });
 
       Game.belongsTo(models.Console, {
-      foreignKey: 'console_id',
+      foreignKey: 'consoles_id',
       as: "consoles"
       });
 
       Game.hasOne(models.OrderDetail, {
-      foreignKey: 'game_id',
+      foreignKey: 'games_id',
       as: "orderDetails"
       });
 
       Game.hasMany(models.Image, {
-      foreignKey: 'game_id',
+      foreignKey: 'games_id',
       as: "images"
       });
     }
@@ -43,9 +43,9 @@ module.exports = (sequelize, DataTypes) => {
     stock: DataTypes.INTEGER,
     stock_min: DataTypes.INTEGER,
     stock_max: DataTypes.INTEGER,
-    edition_id: DataTypes.INTEGER,
-    genre_id: DataTypes.INTEGER,
-    console_id: DataTypes.INTEGER
+    editions_id: DataTypes.INTEGER,
+    genres_id: DataTypes.INTEGER,
+    consoles_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Game',

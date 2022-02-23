@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Edition.hasMany(models.Game, {
-        foreignKey: 'edition_id',
+        foreignKey: 'editions_id',
         as: "games"
       });
     }
   }
   Edition.init({
-    name_edition: DataTypes.STRING
+    name_editions: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Edition',

@@ -1,6 +1,6 @@
 const {body} = require('express-validator');
 const path = require('path')
-const db = require("../database/models");
+const User = require("../database/models/user");
 
 const validaciones = [
     body('nombre')
@@ -13,7 +13,7 @@ const validaciones = [
         .notEmpty().withMessage("Debes completar con un email")
         .isEmail().withMessage("Debes ingresar un email válido"),
     body("email", "Email en uso, favor introduzca otra dirección de correo").custom((value) => {
-        return db.User
+        return User
             .findOne({ where: { email: value } })
             .then((usuario) => {
             if (usuario) {

@@ -1,6 +1,5 @@
 const {body} = require('express-validator');
 const path = require('path')
-const db = require("../database/models");
 
 const validaciones = [
     body('editUsernombre')

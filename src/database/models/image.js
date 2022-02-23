@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Image.belongsTo(models.Game, {
-        foreignKey: 'game_id',
+        foreignKey: 'games_id',
         as: "games"
       });
     }
   }
   Image.init({
     img_url: DataTypes.STRING,
-    game_id: DataTypes.INTEGER
+    games_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Image',

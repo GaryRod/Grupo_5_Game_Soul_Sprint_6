@@ -11,15 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Order.belongsTo(models.Payment, {
-        foreignKey: 'payment_id',
+        foreignKey: 'payments_id',
         as: "payments"
       });
-      Order.belongsTo(models.Status, {
-        foreignKey: 'status_id',
+      Order.belongsTo(models.Statuse, {
+        foreignKey: 'statuses_id',
         as: "statuses"
       });
       Order.belongsTo(models.User, {
-        foreignKey: 'user_id',
+        foreignKey: 'users_id',
         as: "users"
       });
       Order.hasMany(models.OrderDetail, {
@@ -32,9 +32,9 @@ module.exports = (sequelize, DataTypes) => {
     number: DataTypes.INTEGER,
     date: DataTypes.DATE,
     total: DataTypes.DECIMAL,
-    payment_id: DataTypes.INTEGER,
-    status_id: DataTypes.INTEGER,
-    user_id: DataTypes.INTEGER
+    payments_id: DataTypes.INTEGER,
+    statuses_id: DataTypes.INTEGER,
+    users_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Order',
