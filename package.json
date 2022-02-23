@@ -2,7 +2,7 @@
   "name": "grupo_5_game_soul_sprint_6",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js"
   },
