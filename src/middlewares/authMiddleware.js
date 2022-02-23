@@ -1,6 +1,3 @@
-const jsonDB = require('../model/jsonDatabase');
-const usersModel = jsonDB('users');
-
 function authMiddleware(req, res, next) {
 
     if (!req.session.userLogged) {
