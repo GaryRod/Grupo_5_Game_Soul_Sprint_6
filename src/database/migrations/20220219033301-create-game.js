@@ -43,7 +43,7 @@ module.exports = {
       consoles_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'genres',
+          model: 'consoles',
           key: 'id'
         }
       },
