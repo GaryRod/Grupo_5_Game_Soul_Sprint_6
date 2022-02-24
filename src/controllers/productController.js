@@ -63,7 +63,7 @@ const productController = {
         })
 		await db.Image.create({
 			img_url: req.file.filename,
-			games_id: producto.id
+			games_id: req.params.id
 		})
         res.redirect('/')
     },

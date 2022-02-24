@@ -116,6 +116,10 @@ const userController ={
                 }
             })
 
+            let nuevosDatos = await db.User.findByPk(req.params.id)
+            delete nuevosDatos.password;
+            req.session.userLogged = nuevosDatos;
+
             res.redirect('/users/userProfile')
         } 
         catch (error) {
