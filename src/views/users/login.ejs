@@ -38,10 +38,10 @@
 
                     <div class="form__cont">
                         <label for="password">Contraseña:</label>
-                        <input type="password" id="password" class="form__inputs" name="contraseña">
-                        <% if(locals.errors && errors.contraseña){ %> 
+                        <input type="password" id="password" class="form__inputs" name="password">
+                        <% if(locals.errors && errors.password){ %> 
                             <div class="text-danger">
-                                <%= errors.contraseña.msg %>
+                                <%= errors.password.msg %>
                             </div>
                         <% } %> 
                     </div>

@@ -44,9 +44,9 @@
 
                         <div class="form__cont">
                             <label>Contraseña:</label>
-                            <input type="password" name="contraseña" class="form__inputs" value="<%= locals.oldData ? oldData.contraseña : null %>">
-                            <% if (locals.errors && errors.contraseña) { %>
-                                <p class="text-danger"><%= errors.contraseña.msg %></p>
+                            <input type="password" name="password" class="form__inputs" value="<%= locals.oldData ? oldData.password : null %>">
+                            <% if (locals.errors && errors.password) { %>
+                                <p class="text-danger"><%= errors.password.msg %></p>
                             <% } %>
                         </div>
 

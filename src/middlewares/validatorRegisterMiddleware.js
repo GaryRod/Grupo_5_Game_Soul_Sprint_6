@@ -21,7 +21,7 @@ const validaciones = [
             }
             })
     }),
-    body('contraseña')
+    body('password')
         .notEmpty().withMessage("Debes escribir una contraseña")
         .isLength({min: 8}).withMessage("Debes escribir una contraseña de 8 o más caracteres"),
     body('avatar').custom((value, {req})=>{

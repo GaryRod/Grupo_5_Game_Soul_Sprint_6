@@ -21,7 +21,7 @@ const userController ={
         db.User.create({
             first_name: req.body.nombre,
             email: req.body.email,
-            password: bcryptjs.hashSync(req.body.contraseña, 10),
+            password: bcryptjs.hashSync(req.body.password, 10),
             avatar: req.file ? req.file.filename : 'default.png',
             type_user: String(req.body.email).includes('@gamesoul.com')
             })
@@ -44,7 +44,7 @@ const userController ={
             let userToLogin = await db.User.findOne({where: {email: req.body.email}});
             
             if (userToLogin) {
-                let isOkThePasword = bcryptjs.compareSync(req.body.contraseña, userToLogin.password);
+                let isOkThePasword = bcryptjs.compareSync(req.body.password, userToLogin.password);
                 
                 if (isOkThePasword) {
                     delete userToLogin.password;
@@ -57,7 +57,7 @@ const userController ={
                 }
                 return res.render('./users/login', {
                     errors: {
-                        contraseña: {msg: 'La contraseña no es válida'},
+                        password: {msg: 'La contraseña no es válida'},
                     },
                     oldData: req.body
                 })
